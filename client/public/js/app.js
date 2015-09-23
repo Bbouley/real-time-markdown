@@ -1,0 +1,17 @@
+var app = angular.module('controllerApp', ['ngRoute']);
+
+app.config(function($routeProvider, $locationProvider){
+  $locationProvider.html5Mode({
+    enabled : true,
+    requireBase : false
+  }).hashPrefix('!');
+  $routeProvider
+  .when('/', {
+    templateUrl : '../views/home.html',
+    controller : 'HomeController'
+  })
+  .when('/newPost', {
+    templateUrl : '../views/newPost.html',
+    controller: 'BlogController'
+  });
+});

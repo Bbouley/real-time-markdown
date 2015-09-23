@@ -1,13 +1,40 @@
 <!DOCTYPE html>
-<html ng-app = ''>
+<html ng-app = 'controllerApp'>
 <head>
   <meta charset="UTF-8">
   <title>Blog Poster</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
 
-<h2>this is a test</h2>
+  <nav class = 'navbar navbar-default navbar-fixed-top'>
+    <div class = 'container'>
+      <h1>Navbar</h1>
+    </div>
+  </nav>
+
+
+  <div class = 'container main-content'>
+
+  <div class = 'row'>
+    <a href = '/newPost'>New Post</a>
+
+    <a href = '/'>Home</a>
+
+    <div ng-view></div>
+
+  </div>
+
+  </div>
+
+  <nav class = 'navbar navbar-default navbar-fixed-bottom'>
+    <div class = 'container'>
+      <h1>Navbar</h1>
+    </div>
+  </nav>
+
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src = 'http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js'></script>
