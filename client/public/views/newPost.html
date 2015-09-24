@@ -4,9 +4,11 @@
 
 <section class = 'row'>
 
-  <textarea class = 'col-xs-6 full-height' id = 'pad'>Write your text... </textarea>
+  <textarea class = 'col-xs-6 full-height' id = 'pad' ng-model = 'blogTextInput'>Write your text... </textarea>
 
-  <div class = 'col-xs-6 full-height' id = 'markdown'></div>
+  <div class = 'col-xs-6 full-height' id = 'markdown' ng-bind-html = 'trustOutput()' >
+  </div>
+
 </section>
 
 
