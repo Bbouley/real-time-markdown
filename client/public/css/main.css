@@ -1,7 +1,8 @@
 body {
   padding: 50px;
   padding-top: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Signika', sans-serif;
+  font: 14px;
 }
 
 
@@ -13,11 +14,17 @@ a {
 .main-content{
   padding-top: 50px;
   padding-bottom: 25px;
+  border-radius: 3px;
+  background: url('https://s-media-cache-ak0.pinimg.com/originals/92/75/c5/9275c5e3be4e4c47fe108b2992eb978f.jpg');
 }
 
+.newPostPage{
+  color: #52A3CC;
+}
 
 .full-height{
-  height: 80vh;
+  height: 100vh;
+  color:black;
 }
 
 .nav-buttons{
@@ -28,12 +35,10 @@ a {
   display: block;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 #pad{
     font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-
     border: none;
     overflow: auto;
     outline: none;
@@ -49,4 +54,5 @@ a {
     overflow: auto;
     border-left: 1px solid black;
     border-top: 1px solid black;
+    background : white;
 }
