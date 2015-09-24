@@ -1,13 +1,27 @@
 
-
-<p>{{ message }}</p>
-
 <section class = 'row'>
 
+  <form class="form col-xs-12">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" id="blogTitle" placeholder="Blog Title">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea type="text" class="form-control" id="blogDescription" placeholder="Blog Description">
+    </textarea><br>
+
+  <h1 class = 'col-xs-6 text-center'>Write Here</h1>
+  <h1 class = 'col-xs-6 text-center'>Markdown Preview</h1>
   <textarea class = 'col-xs-6 full-height' id = 'pad' ng-model = 'blogTextInput'>Write your text... </textarea>
 
   <div class = 'col-xs-6 full-height' id = 'markdown' ng-bind-html = 'trustOutput()' >
   </div>
+
+  <button type="submit col-xs-offset-5 col-xs-2" class="btn btn-default">Submit Blog Post</button>
+
+  </form>
+
 
 </section>
 

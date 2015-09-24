@@ -8,19 +8,32 @@
 </head>
 <body>
 
-  <nav class = 'navbar navbar-default navbar-fixed-top'>
-    <div class = 'container'>
-      <h1>Navbar</h1>
-    </div>
-  </nav>
+  <div class = 'header'>
+    <nav class = 'navbar navbar-default navbar-fixed-top'>
+      <div class = 'container-fluid'>
+        <div class = 'navbar-header'>
+          <h1 class = 'navbar'>[Insert Title]</h1>
+        </div>
+
+        <div class = 'collapse navbar-collapse navbar-right'>
+        <ul class = 'nav navbar-nav pagination-centered center-block'>
+
+          <li>
+            <a href = '/#/newPost'>New Post</a>
+          </li>
+
+          <li>
+            <a href = '/#/'>Home</a>
+          </li>
+
+        </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 
 
   <div class = 'container main-content'>
-
-  <div class = 'row'>
-    <a href = '/newPost'>New Post</a>
-
-    <a href = '/'>Home</a>
 
     <div ng-view></div>
 
@@ -28,11 +41,11 @@
 
   </div>
 
-  <nav class = 'navbar navbar-default navbar-fixed-bottom'>
+ <!--  <nav class = 'navbar navbar-default navbar-fixed-bottom'>
     <div class = 'container'>
-      <h1>Navbar</h1>
+      <h1>Footer for things</h1>
     </div>
-  </nav>
+  </nav> -->
 
 
 
