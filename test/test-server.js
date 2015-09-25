@@ -9,7 +9,7 @@ var Post = require('../server/models/posts');
 
 var should = chai.should();
 
-chai.ust(chaiHttp);
+chai.use(chaiHttp);
 
 describe('Posts', function(){
 
@@ -26,7 +26,7 @@ describe('Posts', function(){
     });
   });
 
-  afteEach(function(done){
+  afterEach(function(done){
     Post.collection.drop();
     done();
   });
@@ -35,8 +35,9 @@ describe('Posts', function(){
     chai.request(server)
     .get('/api/v1/posts')
     .end(function(err, res){
-      res.should.have.statue(200);
+      res.should.have.status(200);
       res.should.be.json;
+      done();
     });
   });
 
