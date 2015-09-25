@@ -6,14 +6,27 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
-
+var livereload = require('express-livereload');
+var mongoose = require('mongoose');
+var config = require('./_config.js');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
+var api = require('./routes/api.js');
 
 
 // *** express instance *** //
 var app = express();
+
+// mongoose //
+mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
+  if(err) {
+    console.log('Error connecting to the database. ' + err);
+  } else {
+    console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
+  }
+});
+
 
 
 // *** static directory *** //
@@ -31,7 +44,7 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 // *** main routes *** //
 app.use('/', routes);
-
+app.use('/api/v1', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -65,5 +78,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+livereload(app, {watchDir : "../client/public"});
 
 module.exports = app;

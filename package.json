@@ -15,11 +15,14 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "chai": "^3.3.0",
+    "express-livereload": "0.0.24",
     "gulp": "^3.9.0",
     "gulp-connect": "^2.2.0",
     "gulp-jshint": "^1.11.2",
     "gulp-nodemon": "^2.0.4",
     "gulp-server-livereload": "^1.5.3",
+    "mongoose": "^4.1.8",
     "tiny-lr": "^0.1.6"
   }
 }

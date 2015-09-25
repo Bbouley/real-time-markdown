@@ -37,16 +37,16 @@ gulp.task('watch', function() {
   //this is saying on change to javascript files run jshint
 });
 
-// gulp.task('watch', function () {
-//   server.listen();
+// gulp.task('nodemon', function () {
+//   // server.listen();
 //   nodemon({
-//     script: 'server/app.js',
-//     ext: 'js html css'
+//     script: './server/bin/www',
+//     ext: 'js html css',
+//     tasks: ['jshint', 'html', 'css']
 //   }).on('restart', function(){
-//     gulp.src('server/app.js')
-//     .pipe(server())
-//     .pipe(notify('reloading page, please wait... '));
+
 //   });
+
 // });
 
 
