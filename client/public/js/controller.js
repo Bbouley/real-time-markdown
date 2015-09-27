@@ -7,7 +7,9 @@ app.controller('HomeController', function($scope){
 });
 
 app.controller('BlogController', function($scope, $sce){
+
   $scope.message = 'testing Blog controller';
+
   $scope.$watch('blogTextInput', function(newVal, oldVal, scope){
       html = converter.makeHtml(newVal);
       $scope.textOutput = html;
@@ -15,5 +17,11 @@ app.controller('BlogController', function($scope, $sce){
         return $sce.trustAsHtml($scope.textOutput);
       };
   });
+
+  $scope.getPosts = function(url){
+    PostFactory.get(url).then(function(response){
+      $scope.posts = response.data;
+    });
+  };
 
 });
