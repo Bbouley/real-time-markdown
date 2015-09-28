@@ -4,18 +4,18 @@
   <form class="form col-xs-12">
     <div class="form-group">
       <label>Title</label>
-      <input type="text" class="form-control" id="blogTitle" placeholder="Blog Title">
+      <input type="text" class="form-control" id="blogTitle" placeholder="Blog Title" ng-model = 'post.title'>
     </div>
     <div class="form-group">
       <label>Description</label>
-      <textarea type="text" class="form-control" id="blogDescription" placeholder="Blog Description">
+      <textarea type="text" class="form-control" id="blogDescription" placeholder="Blog Description" ng-model = 'post.description'>
     </textarea><br>
 
     <h1 class = 'col-xs-12'>Write Here</h1>
 
-    <textarea class = 'col-xs-6 full-height' id = 'pad' ng-model = 'blogTextInput'>Write your text... </textarea>
+    <textarea class = 'col-xs-6 full-height' id = 'pad' ng-model = 'blogTextInput' >Write your text... </textarea>
 
-    <div class = 'col-xs-6 full-height' id = 'markdown' ng-bind-html = 'trustOutput()' >
+    <div class = 'col-xs-6 full-height' id = 'markdown' ng-bind-html = 'trustOutput()'>
     </div>
 
   </form>
@@ -24,11 +24,27 @@
 
   <br>
 
-  <button type="btn btn-default" class="btn btn-info col-xs-offset-5 col-xs-2">Submit Blog Post</button>
+  <button type="btn btn-default" class="btn btn-info col-xs-offset-5 col-xs-2" ng-click = 'addPost("/api/v1/posts")'>Submit Blog Post</button>
 
   <br><br>
 
-  <button type="btn btn-default" class="btn btn-info col-xs-offset-5 col-xs-2" ng-click = 'getPosts("api/v1/posts"'>Show Blog Posts</button>
+  <button type="btn btn-default" class="btn btn-info col-xs-offset-5 col-xs-2" ng-click = 'getPosts("/api/v1/posts")'>Show Blog Posts</button>
+
+  <div class = 'col-xs-12' ng-repeat = 'post in posts'>
+    <table class = 'table'>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ post.title }}</td>
+          <td>{{ post.description }}</td>
+        </tr>
+      </tbody>
+  </div>
 
 
 

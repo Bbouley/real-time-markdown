@@ -6,4 +6,10 @@ app.factory('PostFactory', ['$http', function($http){
     return $http.get(url);
   };
 
+  obj.post = function(url, payload){
+    return $http.post(url, payload);
+  };
+
+  return obj;
+
 }]);

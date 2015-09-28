@@ -37,7 +37,32 @@ describe('Posts', function(){
     .end(function(err, res){
       res.should.have.status(200);
       res.should.be.json;
-      // res.body.should.be.a('array');
+      res.body.should.be.a('array');
+      res.body[0].should.have.property('title');
+      res.body[0].should.have.property('description');
+      res.body[0].should.have.property('content');
+      res.body[0].should.have.property('_id');
+      res.body[0].title.should.equal('test Title');
+      res.body[0].description.should.equal('testing out the routes');
+      done();
+    });
+  });
+
+  it('should add a single blog post on /posts', function(done){
+    chai.request(server)
+    .post('/api/v1/posts')
+    .send({'title': 'This Is The test title for posts', 'description' : 'This is where I describe stuff', 'content' : 'This is where the content goes' })
+    .end(function(err, res){
+      console.log(res.body.SUCCESS);
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.SUCCESS.should.have.property('title');
+      res.body.SUCCESS.should.have.property('description');
+      res.body.SUCCESS.should.have.property('content');
+      res.body.SUCCESS.should.have.property('_id');
+      res.body.SUCCESS.title.should.equal('This Is The test title for posts');
+      res.body.SUCCESS.description.should.equal('This is where I describe stuff');
       done();
     });
   });

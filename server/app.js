@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var config = require('./_config.js');
 
 // *** routes *** //
-var routes = require('./routes/index.js');
+// var routes = require('./routes/index.js');
 var api = require('./routes/api.js');
 
 
@@ -30,8 +30,9 @@ mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
 
 
 // *** static directory *** //
-app.set('views', path.join(__dirname, 'views'));
-app.engine('html', ejs.renderFile);
+// app.set('views', path.join(__dirname, 'views'));
+// app.engine('html', ejs.renderFile);
+// app.set('view engine', 'html');
 
 
 // *** config middleware *** //
@@ -43,8 +44,10 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 
 // *** main routes *** //
-app.use('/', routes);
-app.use('/api/v1', api);
+app.use('/api/v1/', api);
+app.get('/', function(req, res){
+  res.sendFile(path.join(__dirname, '../client/public/html', 'index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -79,6 +82,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-livereload(app, {watchDir : "../client/public"});
+
 
 module.exports = app;
