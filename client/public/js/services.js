@@ -10,6 +10,14 @@ app.factory('PostFactory', ['$http', function($http){
     return $http.post(url, payload);
   };
 
+  obj.put = function(url, payload){
+    return $http.put(url, payload);
+  };
+
+  obj.delete = function(url){
+    return $http.delete(url);
+  };
+
   return obj;
 
 }]);
