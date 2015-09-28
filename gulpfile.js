@@ -1,54 +1,73 @@
+/**
+ * Module Dependencies
+ */
+
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
-var server = require('gulp-server-livereload');
-var connect = require('gulp-connect');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
 
 
-// configure webserver task
-gulp.task('connect', function() {
-  connect.server({
-    livereload: true,
-  });
-});
+/**
+ * Config
+ */
 
-// configure jshint task
-gulp.task('jshint', function() {
-  return gulp.src('client/public/js/*.js')
+var paths = {
+  styles: [
+    './client/public/css/*.css',
+  ],
+  scripts: [
+    './client/public/js/*.js',
+  ],
+  server: [
+    './server/bin/www'
+  ]
+};
+
+var nodemonConfig = {
+  script: paths.server,
+  ext: 'html js css',
+  ignore: ['node_modules']
+};
+
+
+/**
+ * Gulp Tasks
+ */
+
+gulp.task('lint', function() {
+  return gulp.src(paths.scripts)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('html', function(){
-  gulp.src('client/public/html/*.html')
-  .pipe(connect.reload());
+gulp.task('browser-sync', ['nodemon'], function(done) {
+  browserSync({
+    proxy: "localhost:3000",  // local node app address
+    port: 5000,  // use *different* port than above
+    notify: true
+  }, done);
 });
 
-gulp.task('css', function(){
-  gulp.src('client/public/css/*.css')
-  .pipe(connect.reload());
+gulp.task('nodemon', function (cb) {
+  var called = false;
+  return nodemon(nodemonConfig)
+  .on('start', function () {
+    if (!called) {
+      called = true;
+      cb();
+    }
+  })
+  .on('restart', function () {
+    setTimeout(function () {
+      reload({ stream: false });
+    }, 1000);
+  });
 });
 
-// configure which files to watch and what tasks to use on file changes
 gulp.task('watch', function() {
-  gulp.watch('client/public/js/*.js', ['jshint']);
-  gulp.watch('client/public/html/*.html', ['html']);
-  gulp.watch('client/public/css/*.css', ['css']);
-  //this is saying on change to javascript files run jshint
+  gulp.watch(paths.scripts, ['lint']);
 });
 
-// gulp.task('nodemon', function () {
-//   // server.listen();
-//   nodemon({
-//     script: './server/bin/www',
-//     ext: 'js html css',
-//     tasks: ['jshint', 'html', 'css']
-//   }).on('restart', function(){
-
-//   });
-
-// });
-
-
-// default task!
-gulp.task('default', ['watch', 'connect']);
+gulp.task('default', ['browser-sync', 'watch'], function(){});

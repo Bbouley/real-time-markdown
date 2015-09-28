@@ -13,28 +13,46 @@ router.get('/posts', function(req, res, next) {
       res.json(data);
     }
   });
-});
 
-//get single post
-router.get('/post/:id', function(req, res, next){
-  Post.findById(req.params.id, function(err, data){
-    if(err){
-      res.json({'ERROR': err});
-    } else {
-      res.json({'SUCCESS' : data});
-    }
-  });
-});
+
+// //get single post
+// router.get('/post/:id', function(req, res, next){
+//   Post.findById(req.params.id, function(err, data){
+//     if(err){
+//       res.json({'ERROR': err});
+//     } else {
+//       res.json({'SUCCESS' : data});
+//     }
+//   });
+// });
 
 //post single post
-router.post('/posts', function(req, res, next){
-  console.log('testing post route');
-  newPost = new Post({
+  router.post('/posts', function(req, res, next){
+    console.log('testing post route');
+    newPost = new Post({
+      title : req.body.title,
+      description : req.body.description,
+      content : req.body.content
+    });
+    newPost.save(function(err, data){
+      if(err){
+        res.json({'ERROR' : err});
+      } else {
+        res.json({'SUCCESS' : data});
+      }
+    });
+  });
+
+});
+
+//edit post
+router.put('/post/:id', function(req, res, next){
+  var update = {
     title : req.body.title,
     description : req.body.description,
     content : req.body.content
-  });
-  newPost.save(function(err, data){
+  };
+  Post.findByIdAndUpdate(req.params.id, update, function(err, data){
     if(err){
       res.json({'ERROR' : err});
     } else {
@@ -43,9 +61,16 @@ router.post('/posts', function(req, res, next){
   });
 });
 
-//edit post
-
 //delete post
+router.delete('/post/:id', function(req, res, next){
+  Post.findByIdAndRemove(req.params.id, function(err, data){
+    if(err){
+      res.json({'ERROR': err});
+    } else {
+      res.json({'SUCCESS' : data});
+    }
+  });
+});
 
 
 module.exports = router;

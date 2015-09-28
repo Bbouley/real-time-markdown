@@ -15,6 +15,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "browser-sync": "^2.9.6",
     "chai": "^3.2.0",
     "chai-http": "^1.0.0",
     "express-livereload": "0.0.24",
@@ -23,6 +24,7 @@
     "gulp-jshint": "^1.11.2",
     "gulp-nodemon": "^2.0.4",
     "gulp-server-livereload": "^1.5.3",
+    "jshint-stylish": "^2.0.1",
     "mongoose": "^4.1.8",
     "tiny-lr": "^0.1.6"
   }
