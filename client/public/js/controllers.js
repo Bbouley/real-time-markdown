@@ -11,6 +11,10 @@ app.controller('BlogController', function($scope, $sce, PostFactory, $timeout){
 
   $scope.success = false;
 
+  $scope.showEdit = false;
+
+  $scope.testEdit = false;
+
   $scope.message = 'testing Blog controller';
 
   function successMessage(){
@@ -39,7 +43,7 @@ app.controller('BlogController', function($scope, $sce, PostFactory, $timeout){
       description: $scope.post.description,
       content: $scope.blogTextInput,
     };
-    PostFactory.post(url, payload).then(function(response){
+    PostFactory.post('/api/v1/posts', payload).then(function(response){
       $scope.success = true;
       $timeout($scope.setMessage(), 10000);
       $scope.getPosts();
@@ -47,9 +51,9 @@ app.controller('BlogController', function($scope, $sce, PostFactory, $timeout){
   };
 
   $scope.getPost = function(id){
+    $scope.showEdit = true;
     $scope.findPost = '/api/v1/post/' + id;
     PostFactory.get($scope.findPost).then(function(response){
-      console.log(response.data);
       $scope.post = {
         title : response.data.SUCCESS.title,
         description : response.data.SUCCESS.description,
@@ -57,9 +61,11 @@ app.controller('BlogController', function($scope, $sce, PostFactory, $timeout){
       };
       $scope.blogTextInput = response.data.SUCCESS.content,
       $scope.success = true;
+      console.log($scope.showEdit);
       $timeout(successMessage, 10000);
     });
   };
+
 
   $scope.editPost = function(){
     var url = '/api/v1/post/' + $scope.post._id;
@@ -70,6 +76,18 @@ app.controller('BlogController', function($scope, $sce, PostFactory, $timeout){
     };
     PostFactory.put(url, payload)
     .then(function(response){
+      $scope.getPosts('/api/v1/posts');
+      $scope.success = true;
+      $scope.showEdit = false;
+      $scope.post = {};
+      $scope.blogTextInput = '';
+      $timeout(successMessage, 10000);
+    });
+  };
+
+  $scope.deletePost = function(id){
+    var url = '/api/v1/post/' + id;
+    PostFactory.delete(url).then(function (response){
       $scope.getPosts('/api/v1/posts');
       $scope.success = true;
       $timeout(successMessage, 10000);
